@@ -4,20 +4,22 @@ import com.google.gson.JsonObject;
 
 public class Action3 {
 
-	public static final String COMMA = ", "; 
+	public static final String COMMA = ", ";
 
 	public static JsonObject main(JsonObject args) {
-//		public static void main(String[] args) {
+		// public static void main(String[] args) {
 
 		StringBuffer sb = new StringBuffer();
-		sb.append("start_time, stop_time, interval_nanoSec,").append(System.lineSeparator());
+		sb.append("input_number,start_time, stop_time, interval_nanoSec,").append(System.lineSeparator());
 
 		int input_number = 0;
 
-		if (args.has("number"))
-		 input_number = args.getAsJsonPrimitive("number").getAsInt();
-			
-//			if (args.length > 0) input_number = Integer.parseInt(args[0]);
+		if (args.has("number")){
+			input_number = args.getAsJsonPrimitive("number").getAsInt();
+		}else{
+			input_number = 50;
+		}
+		// if (args.length > 0) input_number = Integer.parseInt(args[0]);
 
 		JsonObject response = new JsonObject();
 
@@ -30,14 +32,12 @@ public class Action3 {
 		long stopTime = System.nanoTime();
 		long interval = stopTime - startTime;
 
-		sb.append(startTime)
-		.append(COMMA)
-		.append(stopTime)
-		.append(COMMA)
-		.append(interval)
-		.append(COMMA);
-		
-//		 System.out.println(sb.toString());
+		sb.append(input_number)
+		.append(COMMA).append(startTime)
+		.append(COMMA).append(stopTime)
+		.append(COMMA).append(interval).append(COMMA);
+
+		// System.out.println(sb.toString());
 		response.addProperty("result", sb.toString());
 
 		return response;
