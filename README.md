@@ -2,7 +2,8 @@
 
 to update the already existed action you can use below line
 
-##create/update action
+##create/update action##
+
 <code>$ bx wsk action update openWhiskTester target/OpenWhiskTester-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.Action3 </code>
 
 
