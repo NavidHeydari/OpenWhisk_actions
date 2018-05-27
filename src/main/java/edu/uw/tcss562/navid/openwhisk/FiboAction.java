@@ -2,7 +2,7 @@ package edu.uw.tcss562.navid.openwhisk;
 
 import com.google.gson.JsonObject;
 
-public class Action3 {
+public class FiboAction {
 
 	public static final String COMMA = ", ";
 
@@ -10,7 +10,7 @@ public class Action3 {
 		// public static void main(String[] args) {
 
 		StringBuffer sb = new StringBuffer();
-		sb.append("input_number,start_time, stop_time, interval_nanoSec,").append(System.lineSeparator());
+//		sb.append("input_number,start_time, stop_time, interval_nanoSec,").append(System.lineSeparator());
 
 		int input_number = 0;
 
