@@ -1,7 +1,8 @@
 #! /bin/sh
 
 echo "starting"
-cmd = "bx wsk action invoke --result openWhiskTester --param number 5 --blocking"
+#cmd = "bx wsk action invoke --result openWhiskTester --param number 5 --blocking"
+curl -X POST https://openwhisk.ng.bluemix.net/api/v1/namespaces/navidh2%40uw.edu_dev/actions/openWhiskTester?blocking=true&number=3
 cmd2 = "echo sample"
 
 for ((count=1;count < 10;count++))
@@ -12,4 +13,5 @@ for ((count=1;count < 10;count++))
 exit 0
 
 
-#https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/9fadac666d0130cfa988c53d4f7920d7b3c72c7f5a942b25e3b8c250862cd1c1/5f1bc93f-5d4b-439a-9bce-9f025ac570f8
+#https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/openWhiskTester.json?number=30
+

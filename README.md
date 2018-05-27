@@ -2,7 +2,7 @@
 
 to update the already existed action you can use below line
 
-##create/update action##
+##create/update action
 
 <code>$ bx wsk action update openWhiskTester target/OpenWhiskTester-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.Action3 </code>
 
@@ -12,11 +12,12 @@ and to create action you can use below:
 <code>$ bx wsk action create openWhiskTester target/OpenWhiskTester-0.0.1-SNAPSHOT.jar --main </code>edu.uw.tcss562.navid.openwhisk.Action3 </code>
 
 ##invoke action
-to execute/invoke the action you can use below
 
+to execute/invoke the action you can use below
 <code>$ bx wsk action invoke --result openWhiskTester --param <inputParam> <value of that arg> --blocking</code>
 
 ##webAction 
+
 or if you create the webAction end point for it using <code>--web true</code>
 then you can call the end point directly and passing the number parameters as GET method input
 using below url
