@@ -6,8 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 import java.util.Objects;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class ActionCaller {
@@ -17,6 +19,9 @@ public class ActionCaller {
 	public static JsonObject main(JsonObject args) {
 		// public static void main(String[] args) {
 
+		List<ActionCallerResult> actionCallingResults = new ArrayList<ActionCallerResult>();
+		Gson jsonConvertor = new Gson();
+		
 		StringBuffer sb = new StringBuffer();
 
 		StringBuilder url = new StringBuilder();
@@ -38,40 +43,50 @@ public class ActionCaller {
 
 		JsonObject destActionCallResponse = new JsonObject();
 
-		String result = "NA";// as default if it didn't get the response.
+		String result = null;// as default if it didn't get the response.
 
-		// start timer
-		long networkDelayStartTime = System.nanoTime();
+		
 
 		for (int index = 0; index < time2Execute; index++) {
-			// calling end point
+			//init and cleanup
+			result = "NA";
+			sb.delete(0, sb.length());
+			
+			// 1. start timer
+			long networkDelayStartTime = System.nanoTime();
+			// 2. calling end point
 			result = call(url.toString());
 
+			// 3. get the result
 			if (Objects.nonNull(result) && result.contains("result")) {
 				result = result.split(":")[1].replaceAll("\"", "").replaceAll("}", "");
 			}
+			// 4. stop timer
+			long networkDelayStopTime = System.nanoTime();
+			long networkDelayInterval = networkDelayStopTime - networkDelayStartTime;
+
+			// 5. formatting result 
+			sb
+			.append("Action called via action REST").append(COMMA)
+				.append(result).append(COMMA)
+				.append("Action called via client").append(COMMA)
+				.append("FullDestActionURL:").append(COMMA)
+				.append(url).append(COMMA)
+				.append("Network Delay Start Time").append(COMMA)
+				.append(networkDelayStartTime).append(COMMA)
+				.append("Network Delay Stop Time").append(COMMA)
+				.append(networkDelayStopTime).append(COMMA)
+				.append("Network Delay Interval Time").append(COMMA)
+				.append(networkDelayInterval).append(COMMA);
+
+			// System.out.println(sb.toString());
+			ActionCallerResult obj = new ActionCallerResult();
+			obj.setResult(sb.toString());
+			actionCallingResults.add(obj);
+			
 		}
-
-		// stop timer
-		long networkDelayStopTime = System.nanoTime();
-		long networkDelayInterval = networkDelayStopTime - networkDelayStartTime;
-
-		sb
-		.append("Action called via action REST").append(COMMA)
-			.append(result).append(COMMA)
-			.append("Action called via client").append(COMMA)
-			.append("FullDestActionURL:").append(COMMA)
-			.append(url).append(COMMA)
-			.append("Network Delay Start Time").append(COMMA)
-			.append(networkDelayStartTime).append(COMMA)
-			.append("Network Delay Stop Time").append(COMMA)
-			.append(networkDelayStopTime).append(COMMA)
-			.append("Network Delay Interval Time").append(COMMA)
-			.append(networkDelayInterval).append(COMMA);
-
-		// System.out.println(sb.toString());
-		destActionCallResponse.addProperty("result", sb.toString());
-
+ 
+		destActionCallResponse.addProperty("result", jsonConvertor.toJson(actionCallingResults));
 		return destActionCallResponse;
 	}
 
