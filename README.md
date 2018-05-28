@@ -31,8 +31,10 @@ result	"input_number,start_time, stop_time, interval_nanoSec,\n30, 2897973813303
 
 to create a web action from a java code using below command 
 
-<code>$ bx wsk action create openWhiskTester target/OpenWhiskTester-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.FiboAction --web true </code>
+<code>$ bx wsk action update actionCpuStress target/OpenWhiskCpuStressAction-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.FiboAction --web true </code>
+
+
 
 and then using the related created web api end point to call/curl it.
 something like this
-<code> curl https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/openWhiskTester.json?number=50 </code>
+<code> curl https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/actionCpuStress.json?number=50 </code>
