@@ -24,18 +24,22 @@ public class FiboAction {
 		JsonObject response = new JsonObject();
 
 		// start timer
-		long startTime = System.nanoTime();
+		long cpuProcessingStartTime = System.nanoTime();
 		// do some work, keep CPU busy!
 		fibonacci_recursion(input_number);
 
 		// stop timer
-		long stopTime = System.nanoTime();
-		long interval = stopTime - startTime;
+		long cpuProcessingStopTime = System.nanoTime();
+		long cpuProcessingIntervalTime = cpuProcessingStopTime - cpuProcessingStartTime;
 
-		sb.append(input_number)
-		.append(COMMA).append(startTime)
-		.append(COMMA).append(stopTime)
-		.append(COMMA).append(interval).append(COMMA);
+		sb.append("inputNumber").append(COMMA)
+		.append(input_number).append(COMMA)
+		.append("cpuProcessingStartTime").append(COMMA)
+		.append(cpuProcessingStartTime).append(COMMA)
+		.append("cpuProcessingStopTime").append(COMMA)
+		.append(cpuProcessingStopTime).append(COMMA)
+		.append("cpuProcessingIntervalTime").append(COMMA)
+		.append(cpuProcessingIntervalTime).append(COMMA);
 
 		// System.out.println(sb.toString());
 		response.addProperty("result", sb.toString());
