@@ -86,7 +86,7 @@ public class ActionCaller {
 			
 		}
  
-		destActionCallResponse.addProperty("result", jsonConvertor.toJson(actionCallingResults));
+		destActionCallResponse.addProperty("finalResults", jsonConvertor.toJson(actionCallingResults));
 		return destActionCallResponse;
 	}
 

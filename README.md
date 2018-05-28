@@ -22,7 +22,7 @@ or if you create the webAction end point for it using <code>--web true</code>
 then you can call the end point directly and passing the number parameters as GET method input
 using below url
 <code>https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/openWhiskTester.json?number=30 </code>
-for example I passed number = 30 with GET method and receieved below result
+for example I passed number = 30 with GET method and received below result
 
 
 result	"input_number,start_time, stop_time, interval_nanoSec,\n30, 2897973813303496, 2897973821313549, 8010053, "
@@ -31,8 +31,17 @@ result	"input_number,start_time, stop_time, interval_nanoSec,\n30, 2897973813303
 
 to create a web action from a java code using below command 
 
-<code>$ bx wsk action create openWhiskTester target/OpenWhiskTester-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.FiboAction --web true </code>
+<code>$ bx wsk action create actionCaller target/OpenWhiskActionCaller-0.0.1-SNAPSHOT.jar --main edu.uw.tcss562.navid.openwhisk.ActionCaller --web true </code>
 
 and then using the related created web api end point to call/curl it.
 something like this
-<code> curl https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/openWhiskTester.json?number=50 </code>
+<code> https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/actionCaller.json </code>
+and you can <b>POST</b> the below Json object as the input to the actionCaller action, so it can call the other action based on the input params.
+<code>
+{
+	"base-url":"https://openwhisk.ng.bluemix.net/api/v1/web/navidh2%40uw.edu_dev/default/actionCpuStress.json",
+	"in-num":"20",
+	"time2Execute":201
+	
+}
+</code>
